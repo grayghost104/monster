@@ -2,19 +2,37 @@ from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from config import db
 from slgalchemy.orm import validates, relationship 
-
-class All(db.Model, SerializerMixin):
+#sep into diff join tables
+class SMon(db.Model, SerializerMixin):
     __tablename__='alls'
     id = db.Column(db.Integer, primary_key=True)
     monster_id = db.Column(db.Integer,db.ForeignKey("monsters.id"))
-    story_id = db.Column(db.Integer, db.ForeignKey("stories.id"))
-    media_id = db.Column(db.Integer,db.ForeignKey("medias.id"))
-    buy_id = db.Column(db.Integer,db.ForeignKey("buys.id"))
+    monster = db.relationship("Monster", back_populates="all", cascade ="all, delete-orphan")
     saved_id = db.Column(db.Integer, db.ForeignKey('saveds.id'))
     saved = db.relationship("Saved", back_populates="all", cascade ="all, delete-orphan")
-    monster = db.relationship("Monster", back_populates="all", cascade ="all, delete-orphan")
+
+class SSto(db.Model, SerializerMixin):
+    __tablename__='alls'
+    id = db.Column(db.Integer, primary_key=True)
+    saved_id = db.Column(db.Integer, db.ForeignKey('saveds.id'))
+    saved = db.relationship("Saved", back_populates="all", cascade ="all, delete-orphan")
+    story_id = db.Column(db.Integer, db.ForeignKey("stories.id"))
     stories = db.relationship("Story", back_populates="all", cascade ="all, delete-orphan")
+
+class SMed(db.Model, SerializerMixin):
+    __tablename__='alls'
+    id = db.Column(db.Integer, primary_key=True)
+    saved_id = db.Column(db.Integer, db.ForeignKey('saveds.id'))
+    saved = db.relationship("Saved", back_populates="all", cascade ="all, delete-orphan")
+    media_id = db.Column(db.Integer,db.ForeignKey("medias.id"))
     medias = db.relationship("Media", back_populates="all", cascade ="all, delete-orphan")
+
+class SBu(db.Model, SerializerMixin):
+    __tablename__='alls'
+    id = db.Column(db.Integer, primary_key=True)
+    saved_id = db.Column(db.Integer, db.ForeignKey('saveds.id'))
+    saved = db.relationship("Saved", back_populates="all", cascade ="all, delete-orphan")
+    buy_id = db.Column(db.Integer,db.ForeignKey("buys.id"))
     buys = db.relationship("Buy", back_populates="all", cascade ="all, delete-orphan")
 
 
@@ -27,8 +45,6 @@ class Monster(db Model, SerializerMixin):
     siblings = db.Column(db.String)
     movies = db.Column (db.String)
     episodes = db.Column (db.String) 
-    save = db.Column(db.String)
-
     saved = db.relationship("Saved", back_populates="monster", cascade ="all, delete-orphan")
     stories = db.relationship("Story", back_populates="monster", cascade ="all, delete-orphan")
     medias = db.relationship("Media", back_populates="monster", cascade ="all, delete-orphan")
@@ -41,8 +57,6 @@ class Story(db.Model, SerializerMixin):
     id=db.Column (db.Integer, primary_key=True) 
     origin_story= db.Column(db.String) 
     L_book = db.Column (db.String)
-    save = db.Column(db.String)
-
     monster_id = db.Column(db.Integer,db.ForeignKey("monsters.id"))
     monster = db.relationship("Monster", back_populates="stories", cascade ="all, delete-orphan")
     saved = db.relationship("Saved", back_populates="stories", cascade ="all, delete-orphan")
@@ -57,8 +71,6 @@ class Media(db.Model, SerializerMixin):
     sites = db.Column(db.String)
     movies = db.Column(db.String)
     episodes = db.Column(db.String)
-    save = db.Column(db.String)
-
     monster_id = db.Column(db.Integer,db.ForeignKey("monsters.id"))
     monster = db.relationship("Monster", back_populates="medias",cascade ="all, delete-orphan")
     saved = db.relationship("Saved", back_populates="medias", cascade ="all, delete-orphan")
@@ -70,13 +82,10 @@ class Buy(db.Model, SerializerMixin):
     cheapest = db.Column(db.String)
     most = db.Column(db.String)
     reliable = db.Column(db.String)
-    save = db.Column(db.String)
-
     monster_id = db.Column(db.Integer,db.ForeignKey("monsters.id"))
     monster = db.relationship("Monster", back_populates="buys", cascade ="all, delete-orphan")
     saved = db.relationship("Saved", back_populates="monster", cascade ="all, delete-orphan")
     serialize_rules = ('-monster.buys','-saved.monster')
-
 
 
     
@@ -88,17 +97,9 @@ class Saved(db.Model, SerializerMixin):
     watching = db.Column(db.String)
     mon = db.Column(db.String)
     story = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     users = db.relationship('User', back_populates='saveds', cascade = 'all, delete-orphan')
 
-
-
-class Info(db.Model, SerializerMixin):
-    __tablename__='infos'
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    user = db.relationship('User', back_populates='infos', cascade = 'all, delete-orphan')
-    saved_id = db.Column(db.Integer, db.ForeignKey('saveds.id'))
-    saved = db.relationship('Saved', back_populates='infos', cascade = 'all delete-orphan')
 
 
 class User(db.Model, SerializerMixin):
@@ -108,7 +109,6 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
     fav_mon = db.Column(db.String)
     fav_mov = db.Column(db.String)
-    save = db.Column(db.String)
     saveds = db.relationship("Saved", back_populates="users", cascade ="all, delete-orphan")
     serialize_rules = ()
 
@@ -133,7 +133,7 @@ class User(db.Model, SerializerMixin):
 
     @validates('username')
     def check_username(self, key, value):
-        if type(value) is str and 0<value=>10:
+        if type(value) is str and 0<value=<12:
             return value
         else:
             raise ValueError('Not a vaild username')

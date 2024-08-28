@@ -102,7 +102,7 @@ class One_saved(Resource):
         else:
             return make_response('This saved does not exist',404)
     def delete(self, id):
-        one = saved.query.filter(saved.id == id).first()
+        one = Saved.query.filter(Saved.id == id).first()
         if one:
             db.session.delete(one)
             db.session.commit()
