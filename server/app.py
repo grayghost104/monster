@@ -1,38 +1,41 @@
-from flask import request, session
+from flask import request, session, jsonify, make_response
 from flask_restful import Resource, Api
 from config import app, db, api
-from moodels import User, Monster, Buy, Media, Story, Saved
+from models import User, Monster, Buy, Media
 
-@app.before_request
-def check_if_logged_in():
-    print(request.endpoint)
-    if  session.get('user_id') or request.endpoint in ('login','register','session'):
-        pass
-    else:
-        return make_response({'error':'Please log in first'}, 403)
+# @app.before_request
+# def check_if_logged_in():
+#     print(request.endpoint)
+#     if  session.get('user_id') or request.endpoint in ('login','register','session'):
+#         pass
+#     else:
+#         return make_response({'error':'Please log in first'}, 403)
 
+
+#HAD POST WORKING, BUT NOW BROKEN
 class All_User(Resource):
     def get(self):
         au = User.query.all()
-        return [us.to_dict(rules=()) for us in au],200
+        return [us.to_dict(rules=('-sbus', '-smeds','-smons')) for us in au],200
     def post(self):
         try:
             data = request.get_json()
             new_user = User(
-                username = data['username'], 
+                username = data['username'],
+                password = data['password'],
                 fav_mon = data['fav_mon'], 
                 fav_mov = data['fav_mov']
             )
             db.session.add(new_user)
             db.session.commit()
-            return new_user.to_dict(rules=()),200
+            return new_user.to_dict(rules=('-sbus', '-smeds','-smons')),200
         except Exception as e:
             return make_response({'errors': str(e)},404)
 class One_User(Resource):
     def get(self, id):
         act = User.query.filter(User.id == id).first()
         if act:
-            return act.to_dict(rules=()),200
+            return act.to_dict(rules=('-sbus', '-smeds','-smons')),200
         else:
             return make_response({'error':'This user does not exist'},400)
     def patch(self, id):
@@ -44,7 +47,7 @@ class One_User(Resource):
                     setattr(one,key,data[key])
                 db.session.add(one)
                 db.session.commit()
-                return one.to_dict(rules=()),202
+                return one.to_dict(rules=('-sbus', '-smeds','-smons')),202
             except Exception as e:
                 return make_response({"error": str(e)},404) 
         else:
@@ -59,36 +62,40 @@ class One_User(Resource):
             return make_response({
                 'error': 'Could not find user'
             },404)
-api.add_resource(All_User,'/users', endpoint='register')
-api.add_resource(One_User,'/users/<int:id>')
+api.add_resource(All_User,'/user' 
+# endpoint='register'
+)
+api.add_resource(One_User,'/user/<int:id>')
 
-class All_Saved(Resource):
+class All_Monster(Resource):
     def get(self):
-        au = Saved.query.all()
+        au = Monster.query.all()
         return [us.to_dict(rules=()) for us in au],200
     def post(self):
         try:
             data = request.get_json()
-            new_saved = saved(
-                buying = data['buying'], 
-                watching = data['watching'], 
-                mon = data['mon'], 
-                story = data['story']
+            new_monster = Monster(
+                name = data['name'], 
+                age = data['age'], 
+                parents = data['parents'], 
+                siblings = data['siblings'],
+                movies = data['movies'], 
+                episodes = data['episodes']
             )
-            db.session.add(new_saved)
+            db.session.add(new_monster)
             db.session.commit()
-            return new_saved.to_dict(rules=()),200
+            return new_monster.to_dict(rules=()),200
         except Exception as e:
             return make_response({'errors': str(e)},404)
-class One_saved(Resource):
+class One_Monster(Resource):
     def get(self, id):
-        act = Saved.query.filter(Saved.id == id).first()
+        act = Monster.query.filter(Monster.id == id).first()
         if act:
             return act.to_dict(rules=()),200
         else:
-            return make_response({'error':'This saved does not exist'},400)
+            return make_response({'error':'This monster does not exist'},400)
     def patch(self, id):
-        one = Saved.query.filter(saved.id == id).first()
+        one = Monster.query.filter(Monster.id == id).first()
         if one:
             try:
                 data = request.get_json()
@@ -100,36 +107,19 @@ class One_saved(Resource):
             except Exception as e:
                 return make_response({"error": str(e)},404) 
         else:
-            return make_response('This saved does not exist',404)
+            return make_response('This monster does not exist',404)
     def delete(self, id):
-        one = Saved.query.filter(Saved.id == id).first()
+        one = Monster.query.filter(Monster.id == id).first()
         if one:
             db.session.delete(one)
             db.session.commit()
             return {}, 204
         else:
             return make_response({
-                'error': 'Could not find saved'
+                'error': 'Could not find monster'
             },404)
-api.add_resource(All_saved,'/saveds', endpoint='register')
-api.add_resource(One_saved,'/saveds/<int:id>')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+api.add_resource(All_Monster,'/monster')
+api.add_resource(One_Monster,'/monster/<int:id>')
 
 
 
