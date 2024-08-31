@@ -70,7 +70,7 @@ api.add_resource(One_User,'/user/<int:id>')
 class All_Monster(Resource):
     def get(self):
         au = Monster.query.all()
-        return [us.to_dict(rules=()) for us in au],200
+        return [us.to_dict(rules=('-smons',)) for us in au],200
     def post(self):
         try:
             data = request.get_json()
@@ -84,14 +84,14 @@ class All_Monster(Resource):
             )
             db.session.add(new_monster)
             db.session.commit()
-            return new_monster.to_dict(rules=()),200
+            return new_monster.to_dict(rules=('-smons',)),200
         except Exception as e:
             return make_response({'errors': str(e)},404)
 class One_Monster(Resource):
     def get(self, id):
         act = Monster.query.filter(Monster.id == id).first()
         if act:
-            return act.to_dict(rules=()),200
+            return act.to_dict(rules=('-smons',)),200
         else:
             return make_response({'error':'This monster does not exist'},400)
     def patch(self, id):
@@ -103,7 +103,7 @@ class One_Monster(Resource):
                     setattr(one,key,data[key])
                 db.session.add(one)
                 db.session.commit()
-                return one.to_dict(rules=()),202
+                return one.to_dict(rules=('-smons',)),202
             except Exception as e:
                 return make_response({"error": str(e)},404) 
         else:
@@ -122,11 +122,107 @@ api.add_resource(All_Monster,'/monster')
 api.add_resource(One_Monster,'/monster/<int:id>')
 
 
+class All_Media(Resource):
+    def get(self):
+        au = Media.query.all()
+        return [us.to_dict(rules=('-smeds',)) for us in au],200
+    def post(self):
+        try:
+            data = request.get_json()
+            new_media = media(
+                movies = data['movies'], 
+                episodes = data['episodes']
+            )
+            db.session.add(new_media)
+            db.session.commit()
+            return new_media.to_dict(rules=('-smeds',)),200
+        except Exception as e:
+            return make_response({'errors': str(e)},404)
+class One_Media(Resource):
+    def get(self, id):
+        act = Media.query.filter(Media.id == id).first()
+        if act:
+            return act.to_dict(rules=('-smeds',)),200
+        else:
+            return make_response({'error':'This media does not exist'},400)
+    def patch(self, id):
+        one = Media.query.filter(Media.id == id).first()
+        if one:
+            try:
+                data = request.get_json()
+                for key in data:
+                    setattr(one,key,data[key])
+                db.session.add(one)
+                db.session.commit()
+                return one.to_dict(rules=('-smeds',)),202
+            except Exception as e:
+                return make_response({"error": str(e)},404) 
+        else:
+            return make_response('This media does not exist',404)
+    def delete(self, id):
+        one = Media.query.filter(Media.id == id).first()
+        if one:
+            db.session.delete(one)
+            db.session.commit()
+            return {}, 204
+        else:
+            return make_response({
+                'error': 'Could not find media'
+            },404)
+api.add_resource(All_Media,'/media')
+api.add_resource(One_Media,'/media/<int:id>')
 
 
-
-
-
+class All_Buy(Resource):
+    def get(self):
+        au = Buy.query.all()
+        return [us.to_dict(rules=('-sbus', )) for us in au],200
+    def post(self):
+        try:
+            data = request.get_json()
+            new_buy = buy(
+                cheapest = data['cheapest'], 
+                most = data['most'],
+                reliable = data['reliable']
+            )
+            db.session.add(new_buy)
+            db.session.commit()
+            return new_buy.to_dict(rules=('-sbus', )),200
+        except Exception as e:
+            return make_response({'errors': str(e)},404)
+class One_Buy(Resource):
+    def get(self, id):
+        act = Buy.query.filter(Buy.id == id).first()
+        if act:
+            return act.to_dict(rules=('-sbus', )),200
+        else:
+            return make_response({'error':'This buy does not exist'},400)
+    def patch(self, id):
+        one = Buy.query.filter(Buy.id == id).first()
+        if one:
+            try:
+                data = request.get_json()
+                for key in data:
+                    setattr(one,key,data[key])
+                db.session.add(one)
+                db.session.commit()
+                return one.to_dict(rules=('-sbus', )),202
+            except Exception as e:
+                return make_response({"error": str(e)},404) 
+        else:
+            return make_response('This buy does not exist',404)
+    def delete(self, id):
+        one = Buy.query.filter(Buy.id == id).first()
+        if one:
+            db.session.delete(one)
+            db.session.commit()
+            return {}, 204
+        else:
+            return make_response({
+                'error': 'Could not find buy'
+            },404)
+api.add_resource(All_Buy,'/buy')
+api.add_resource(One_Buy,'/buy/<int:id>')
 
 
 if __name__ == '__main__':

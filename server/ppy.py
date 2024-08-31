@@ -4,13 +4,14 @@ import requests
 from bs4 import BeautifulSoup 
 app = Flask(__name__)
 
-url = 'https://monsterhigh.fandom.com/wiki/Great_Scarrier_Reef_(TV_special)'
+url = 'https://en.wikipedia.org/wiki/Monster_High_(web_series)'
 def news():
     response = requests.get(url)
     if response.status_code == 200:
         soup = BeautifulSoup(response.text, "html.parser")
-        table = soup.find("table")
-        print(table)
+        test = soup.find("td", classname = "summary")
+        # test  = soup.find("div", attrs={"class": "s-item_wrapper clearfix"})
+        print(test)
     else:
         print('didnt work')
 
@@ -21,10 +22,8 @@ def grape():
     # healdlines = news()
     return{}
 if __name__ == "__main__":
+    app.run(debug=True)
     news()
-
-
-app.run(debug=True)
 
 
 
