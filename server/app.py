@@ -281,33 +281,36 @@ class One_Buy(Resource):
             },404)
 api.add_resource(All_Buy,'/buy')
 api.add_resource(One_Buy,'/buy/<int:id>')
-# class S_Mon(Resource):
-#     def get(sefl,id):
-#         smon = SMon.query.filter(SMon.id ==id).first()
-#         if smon:
-#             return smon.to_dict()
-#         else:
-#             return {"error, not a valid id"}
-#     def post(self,id):
-#         try:
-#             data = request.get_json()
-#             monster.id = data.get('monster_id')
-#             user.id = data.get('user_id')
-#             user = User.query.get(id)
-#             monster = Monster.query.get(id)
-#             monster = Monster.query.get(monster_id)
-#             user = User.query.get(user_id)
-#             if monster and user:
-#                 if monster and monster not in SMon.save:
-#                     SMon.save.append(monster)
-#                     SMon.save.append(user)
-#                     db.session.commit()
-#                     return {"Monster has been saved!"},201
-#                 else:
-#                     return {"Monster alread saved"},400
-#             else:
-#                 return {"Error, this monster doesn't exist"}
-# api.add_resource(S_Mon,'/s_mon')
+class S_Mon(Resource):
+    def get(sefl,id):
+        smon = SMon.query.filter(SMon.id ==id).first()
+        if smon:
+            return smon.to_dict()
+        else:
+            return {"error, not a valid id"}
+    def post(self,id):
+        try:
+            data = request.get_json()
+            monster.id = data.get('monster_id')
+            user.id = data.get('user_id')
+            user = User.query.get(id)
+            monster = Monster.query.get(id)
+            monster = Monster.query.get(monster_id)
+            user = User.query.get(user_id)
+            if monster and user:
+                if monster and monster not in SMon.save:
+                    print(monster)
+                    print(user)
+                    Smon.save = monster + user
+                    SMon.save.append(monster)
+                    SMon.save.append(user)
+                    db.session.commit()
+                    return {"Monster has been saved!"},201
+                else:
+                    return {"Monster alread saved"},400
+            else:
+                return {"Error, this monster doesn't exist"}
+api.add_resource(S_Mon,'/s_mon')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
