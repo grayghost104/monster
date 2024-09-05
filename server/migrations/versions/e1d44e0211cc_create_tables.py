@@ -1,8 +1,8 @@
 """Create tables
 
-Revision ID: e0f1110c2a49
+Revision ID: e1d44e0211cc
 Revises: 
-Create Date: 2024-08-29 12:24:41.490493
+Create Date: 2024-09-05 16:52:03.881861
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e0f1110c2a49'
+revision = 'e1d44e0211cc'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,9 +23,7 @@ def upgrade():
     sa.Column('name', sa.String(), nullable=True),
     sa.Column('age', sa.Integer(), nullable=True),
     sa.Column('parents', sa.String(), nullable=True),
-    sa.Column('siblings', sa.String(), nullable=True),
     sa.Column('movies', sa.String(), nullable=True),
-    sa.Column('episodes', sa.String(), nullable=True),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_monsters'))
     )
     op.create_table('users',
@@ -39,9 +37,7 @@ def upgrade():
     )
     op.create_table('buys',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('cheapest', sa.String(), nullable=True),
-    sa.Column('most', sa.String(), nullable=True),
-    sa.Column('reliable', sa.String(), nullable=True),
+    sa.Column('dolls', sa.String(), nullable=True),
     sa.Column('monster_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['monster_id'], ['monsters.id'], name=op.f('fk_buys_monster_id_monsters')),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_buys'))
@@ -64,6 +60,7 @@ def upgrade():
     )
     op.create_table('sbus',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('save', sa.String(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('buy_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['buy_id'], ['buys.id'], name=op.f('fk_sbus_buy_id_buys')),
@@ -72,6 +69,7 @@ def upgrade():
     )
     op.create_table('smeds',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('save', sa.String(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('media_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['media_id'], ['medias.id'], name=op.f('fk_smeds_media_id_medias')),

@@ -11,8 +11,8 @@ from bs4 import BeautifulSoup
 
 # if __name__ == '__main__':
 # fake = Faker()
-main = User(username="gray_ghost", password= "kittenlove", fav_mon= "Lagoona Blue", fav_mov="Monster High Why Do Ghouls Fall in Love?")
-main2 = User(username="isis", password= "evan", fav_mon= "Draculaura", fav_mov="Monster High Why Do Ghouls Fall in Love?")
+main = User(username="gray_ghost", password_hash= "kittenlove", fav_mon= "Lagoona Blue", fav_mov="Monster High Why Do Ghouls Fall in Love?")
+main2 = User(username="isis", password_hash= "evan", fav_mon= "Draculaura", fav_mov="Monster High Why Do Ghouls Fall in Love?")
 # def create_users():
 #     for _ in range(10):
 #         user= User(

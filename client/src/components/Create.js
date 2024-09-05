@@ -8,7 +8,7 @@ function Create() {
   return (
     <form onSubmit={(e) => {
         e.preventDefault()
-        fetch('/api/create', {
+        fetch('/api/user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -7,12 +7,9 @@ from sqlalchemy.orm import relationship,validates
 
 class SMon(db.Model, SerializerMixin):
     __tablename__='smons'
-    id = db.Column(db.Integer, primary_key=True)
-    save = db.Column(db.String)
-    monster_id = db.Column(db.Integer,db.ForeignKey("monsters.id"))
-    monster = db.relationship("Monster", back_populates="smons")
-    users = db.relationship('User', back_populates='smons')
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    monster_id = db.Column('monster_id', db.Integer, db.ForeignKey("monsters.id"), primary_key=True)
+    user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True)
 
 
 class SMed(db.Model, SerializerMixin):
@@ -43,12 +40,11 @@ class Monster(db.Model, SerializerMixin):
     age = db.Column (db.Integer) 
     parents = db.Column (db.String)
     movies = db.Column (db.String)
-    smons = db.relationship("SMon", back_populates="monster", cascade = "all, delete-orphan")
+    users = db.relationship('User', secondary='smons', back_populates='monsters')
     # stories = db.relationship("Story", back_populates="monster", cascade ="all, delete-orphan")
     medias = db.relationship("Media", back_populates="monster", cascade ="all, delete-orphan")
     buys = db.relationship("Buy", back_populates="monster", cascade ="all, delete-orphan")
-    serialize_rules = ('-medias.monster','-smons.monster')
-
+    serialize_rules = ('-medias.monster','-users.monsters')
 
 class Media(db.Model, SerializerMixin):
     __tablename__= 'medias' 
@@ -77,13 +73,11 @@ class User(db.Model, SerializerMixin):
     _password_hash = db.Column(db.String)
     fav_mon = db.Column(db.String)
     fav_mov = db.Column(db.String)
-    smons = db.relationship("SMon", back_populates="users")
+    monsters = db.relationship("Monster", secondary='smons', back_populates='users')
     smeds = db.relationship("SMed", back_populates="users")
     sbus = db.relationship("SBu", back_populates="users")
-    serialize_rules = ()
+    serialize_rules = ('-monsters.users')
 
-
-    
     @hybrid_property
     def password_hash(self):
         return self._password_hash
@@ -102,8 +96,6 @@ class User(db.Model, SerializerMixin):
             return value
         else:
             raise ValueError("Make your password longer")
-
-
 
     @validates('fav_mon') 
     def check_mon(self, key, value):
