@@ -1,13 +1,14 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.ext.associationproxy import association_proxy
-from config import db, metadata
+from config import db, metadata, bcrypt
 from sqlalchemy.orm import relationship,validates 
 
 
 class SMon(db.Model, SerializerMixin):
     __tablename__='smons'
     id = db.Column(db.Integer, primary_key=True)
+    save = db.Column(db.String)
     monster_id = db.Column(db.Integer,db.ForeignKey("monsters.id"))
     monster = db.relationship("Monster", back_populates="smons")
     users = db.relationship('User', back_populates='smons')
@@ -17,6 +18,7 @@ class SMon(db.Model, SerializerMixin):
 class SMed(db.Model, SerializerMixin):
     __tablename__='smeds'
     id = db.Column(db.Integer, primary_key=True)
+    save = db.Column(db.String)
     users = db.relationship('User', back_populates='smeds')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     media_id = db.Column(db.Integer,db.ForeignKey("medias.id"))
@@ -25,10 +27,13 @@ class SMed(db.Model, SerializerMixin):
 class SBu(db.Model, SerializerMixin):
     __tablename__='sbus'
     id = db.Column(db.Integer, primary_key=True)
+    save = db.Column(db.String)
     users = db.relationship('User', back_populates='sbus')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     buy_id = db.Column(db.Integer,db.ForeignKey("buys.id"))
     buys = db.relationship("Buy", back_populates="sbus")
+
+
 
 
 class Monster(db.Model, SerializerMixin): 
@@ -37,9 +42,7 @@ class Monster(db.Model, SerializerMixin):
     name = db.Column (db.String) 
     age = db.Column (db.Integer) 
     parents = db.Column (db.String)
-    siblings = db.Column(db.String)
     movies = db.Column (db.String)
-    episodes = db.Column (db.String)
     smons = db.relationship("SMon", back_populates="monster", cascade = "all, delete-orphan")
     # stories = db.relationship("Story", back_populates="monster", cascade ="all, delete-orphan")
     medias = db.relationship("Media", back_populates="monster", cascade ="all, delete-orphan")
@@ -60,9 +63,7 @@ class Media(db.Model, SerializerMixin):
 class Buy(db.Model, SerializerMixin):
     __tablename__= 'buys' 
     id=db. Column (db.Integer, primary_key=True)
-    cheapest = db.Column(db.String)
-    most = db.Column(db.String)
-    reliable = db.Column(db.String)
+    dolls = db.Column(db.String)
     monster_id = db.Column(db.Integer,db.ForeignKey("monsters.id"))
     monster = db.relationship("Monster", back_populates="buys")
     sbus = db.relationship("SBu", back_populates="buys")
@@ -73,13 +74,36 @@ class User(db.Model, SerializerMixin):
     __tablename__= 'users' 
     id=db.Column (db.Integer, primary_key=True)
     username= db.Column(db.String, nullable=False, unique=True)
-    password = db.Column(db.String)
+    _password_hash = db.Column(db.String)
     fav_mon = db.Column(db.String)
     fav_mov = db.Column(db.String)
     smons = db.relationship("SMon", back_populates="users")
     smeds = db.relationship("SMed", back_populates="users")
     sbus = db.relationship("SBu", back_populates="users")
     serialize_rules = ()
+
+
+    
+    @hybrid_property
+    def password_hash(self):
+        return self._password_hash
+
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
+        self._password_hash = password_hash.decode('utf-8')
+
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self._password_hash,password.encode('utf-8'))
+
+    @validates('password')
+    def check_pass(self,key,value):
+        if 0>=value>=8:
+            return value
+        else:
+            raise ValueError("Make your password longer")
+
+
 
     @validates('fav_mon') 
     def check_mon(self, key, value):

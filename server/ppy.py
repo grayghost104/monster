@@ -9,21 +9,26 @@ def news():
     if response.status_code == 200:
         soup= BeautifulSoup(response.text, "html.parser")
         ebay = []
-        b1 = soup.find('li', id="item5a1575ea09")
-        b2 = soup.find('li', id="item36e246057f")
-        b3 = soup.find('li', id="item2b5908a6f9")
-        b4 = soup.find('li', id="item2b62d9c3a3")
-        b5 = soup.find('li', id="item26def8c1df")
-        b6 = soup.find('li', id="item34b2681cde")
-        b7 = soup.find('li', id="item472fe7ed45")
-        ebay.extend(b1,b2,b3,b4,b5,b6,b7)
-        # print(b1)
-        # print(b2)
-        # print(b3)
-        # print(b4)
-        # print(b5)
-        # print(b6)
-        # print(b7)
+        d1 = soup.find('li', id="item5a1575ea09")
+        d2 = soup.find('li', id="item36e246057f")
+        d3 = soup.find('li', id="item2b5908a6f9")
+        d4 = soup.find('li', id="item2b62d9c3a3")
+        d5 = soup.find('li', id="item26def8c1df")
+        d6 = soup.find('li', id="item34b2681cde")
+        d7 = soup.find('li', id="item472fe7ed45")
+
+        a1 = soup.find('li', id="item5772d2585c")
+        a2 = soup.find('li', id="item5772d2574e")
+
+        ebay.append(a1)
+        ebay.append(a2)
+        ebay.append(d1)
+        ebay.append(d2)
+        ebay.append(d3)
+        ebay.append(d4)
+        ebay.append(d5)
+        ebay.append(d6)
+        ebay.append(d7)
         print(ebay)
     else:
         print('didnt work')
@@ -34,60 +39,6 @@ def grape():
 if __name__ == "__main__":
     app.run(debug=True)
     news()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
