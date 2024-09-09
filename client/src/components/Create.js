@@ -3,8 +3,8 @@ import { Button,
    Label, TextInput } from "flowbite-react";
 // import { Navigate, useNavigate } from 'react-router-dom';
 
-function Create() {
-  // const nav = useNavigate()
+function Create({username, setUsername, password, setPassword, user, setUser, sLI, setSLI}) {
+
   return (
     <form onSubmit={(e) => {
         e.preventDefault()
@@ -32,7 +32,7 @@ function Create() {
 
     }}>
           <Label value="Your username" />
-        <TextInput id="username"/>
+        <TextInput type="text" value={username} onChange={(e)=>setUsername(e.target.value)} placeholder="Username"  id="username"/>
           <Label value="Your password" />
         <TextInput id="password"/>
           <Label value="Favorite Monster High Character" />

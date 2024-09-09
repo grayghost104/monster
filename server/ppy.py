@@ -16,10 +16,10 @@ def news():
         d5 = soup.find('li', id="item26def8c1df")
         d6 = soup.find('li', id="item34b2681cde")
         d7 = soup.find('li', id="item472fe7ed45")
-
+<li data-viewport="{"trackableId":"01J7BTBEJQ90QK71AJC2G5RFGG"}" id="item26df79b39f" class="s-item s-item__pl-on-bottom" data-view="mi:1686|iid:15">
         a1 = soup.find('li', id="item5772d2585c")
-        a2 = soup.find('li', id="item5772d2574e")
-
+        # a2 = soup.find('li', id="item5775a802e2")
+# <li data-viewport="{"trackableId":"01J7BS6EBXYD5ESQQAXQ2XPAHX"}" id="item5775a802e2" class="s-item s-item__pl-on-bottom" data-view="mi:1686|iid:4">
         ebay.append(a1)
         ebay.append(a2)
         ebay.append(d1)

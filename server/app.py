@@ -7,6 +7,15 @@ from models import User, Monster, Buy, Media, SMed, SMon, SBu
 
 
 # @app.before_request
+# def check_credentials():
+#     valid_routes = ("/checksessions","/login", "/users")
+#     if request.path not in valid_routes and 'user_id' not in session:
+#         return {"error": "please login"},401
+#     else:
+#         print(session)
+#         pass
+
+# @app.before_request
 # def check_if_logged_in():
 #     print(request.endpoint)
 #     if  session.get('user_id') or request.endpoint in ('login','register','session'):
@@ -304,13 +313,12 @@ class One_Buy(Resource):
 api.add_resource(All_Buy,'/buy')
 api.add_resource(One_Buy,'/buy/<int:id>')
 
-
-class SMon(Resource):
-    # def get(self, id):
-    #     sm = SMon.query.all()
-    #     for on in sm:
-    #         return on.to_dict()
-        
+#Idk if i i will keep this or being able to save a monster. 
+#I think I will just do that one way when they login in/ create an account they go start to that monster 
+class All_SMon(Resource):
+    def get(self, id):
+        sm = User.monster.query.all()
+        return [us.to_dict() for us in sm],200
     def post(self, id):
         try:
             data = request.get_json()
@@ -319,46 +327,36 @@ class SMon(Resource):
             monster = Monster.query.get(monster_id)
             user = User.query.get(user_id)
             if (monster and user):
-                if (monster not in user.monster):
+                if (monster not in User.monster):
                     print(monster)
                     print(user)
                     user.monster.append(monster)
                     db.session.commit()
-                    return {"Message": "Yay"}
+                    return {"Message": "Monster has been saved!"}, 201
                 else: 
-                    return {"message1"}
+                    return {"Message": "Monster is already saved"}, 400
             else:
-                return {"error"}
+                return {"Error": "This monster does not exist"}
         except Exception as e:
             print(e)
-            return {"error"}
+            return {"Error" : "Invalid id"},400
+api.add_resource(All_SMon, '/user/<int:user_id>/s_mon')
 
-api.add_resource(SMon, '/monster/<int:id>')
-
-# class S_Mon(Resource):
-#     def get(self,id):
-#         sm = SMon.query.all()
-#         for on in sm:
-#             return on.to_dict()
-#     def post(self,id):
-#         try:
-#             data=request.get_json()
-#             monster_id = data.get('monster_id')
-#             user_id = data.get('user.id')
-#             monster = Monster.query.get(monster_id)
-#             user = User.query.get(user_id)
-#             if monster and user:
-#                 if monster and user not in Smon.save:
-#                     print(monster)
-#                     print(user)
-#                     Smon.save = monster + user
-#                     db.session.add(monster)
-#                     db.session.add(user)
-#                     db.session.commit()
-#                     return {"Monster has been saved!"},201
-#                 else: return {"Monster is already saved"},400
-#             else: return{"Error": "This monster does not exist"}
-# api.add_resource(S_Mon, '/s_mon')
+class One_SMon(Resource):
+    def get(self, id):
+        sm = User.monster.filter(User.monster.id == id).first()
+        return [us.to_dict() for us in sm],200
+    def delete(self, id):
+        sm = User.monster.filter(User.monster.id == id).first()
+        if (sm):
+            db.session.delete(sm)
+            db.session.commit()
+            return {}, 204
+        else:
+            return make_response({
+                'error': 'Could not find monster'
+            },404)
+api.add_resource(One_SMon, '/o_s_mon/<int:id>')
 
 
 if __name__ == '__main__':

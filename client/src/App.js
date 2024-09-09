@@ -2,27 +2,37 @@ import React, { useEffect, useState } from "react";
 // import { Switch, Route } from "react-router-dom";
 import { Sidebar } from "flowbite-react";
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from "react-icons/hi";
-import Create from "./components/Create";
+// import Create from "./components/Create";
 import Media from "./components/Media";
 import Monster from "./components/Monster";
 import Buy from "./components/Buy";
 import Head from "./Head";
-import Login from "./components/LoginIn";
+import Account from "./components/Account";
 import {
   Routes,
-  RouterProvider,
   Route,
   Link,
   BrowserRouter,
-  createBrowserRouter,
   redirect
 } from 'react-router-dom'
-
 function App() {
-  const [password, setPassword] = useState("")
-  const [username, setUsername] = useState("")
-  const [user, setUser] = useState(null)
-  const [sLI, setSLI] = useState(false)
+  const [there, setThere] = useState(null);
+  // useEffect(()=>{
+  //   fetch('/api/checkse')
+  //   .then(r=>{
+  //     if (r.ok){
+  //       return r.json()
+  //     }
+  //     else {throw new Error}
+  //   })
+  //   .then(data=>{
+  //     setThere(data)
+  //   })
+  //   .catch(()=>{})
+  // },[])
+
+
+
   // useEffect(() => {
   //   fetch('/api/session')
   //   .then(r=>{
@@ -36,70 +46,39 @@ function App() {
       
   // }, [])
 
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Login 
-      username={username} setUsername={setUsername} 
-                password={password} setPassword={setPassword} 
-                user={user} setUser={setUser} sLI ={sLI} setSLI ={setSLI}
-                />
-    },
-    {
-      path: "/create",
-      element: <Create/>,
-    },
-    {
-      path: "/monster",
-      element: <Monster/>,
-      loader: () => {
-        return user ? true: redirect("/")
-       }
-    }
-    // {
-    //   path: "/media",
-    //   element: <Media/>,
-    //   loader: () => {
-    //     return user ? true: redirect("/")
-    //    }
-    // },
-    // {
-    //   path: "/buy",
-    //   element: <Buy/>,
-    //   loader: () => {
-    //     return user ? true: redirect("/")
-    //    }
-    // },
-    // {
-    //   path: "/user",
-    //   element: <User/>,
-    //   loader: () => {
-    //     return user ? true: redirect("/")
-    //    }
-    // }
-  ])
-  return (
-    <div>
 
-    <RouterProvider router={router}/>
+
+
+//   function handleLogout(){
+//     fetch('/api/logout',{method:"DELETE"})
+//     .then(r=>r.json())
+//     .then(data => setUser(undefined))
+//     .then(()=>navigate('/'))
+// }
+
+
+
+  return(
+    <div className="App">
+      <BrowserRouter>
+      <Head/>
+        <Routes>
+          { there ? (
+            <> 
+          <Route path='/buy' element={<Buy/>}/>
+          <Route path='/media' element={<Media/>}/> 
+          <Route path="/monster" element={<Monster/> } />
+            </>
+          ): (
+            <>
+            <Route path='/' element={<Account there={there} setThere={setThere}/>}/>
+            </>
+          )}
+        </Routes>
+      </BrowserRouter>
     </div>
   )
-
-
-
-//   return(
-//     <div className="App">
-//       <BrowserRouter>
-//       <Head/>
-//         <Routes>
-//           <Route path='/buy' element={<Buy/>}/>
-//           <Route path='/media' element={<Media/>}/> 
-//           <Route path="/monster" element={<Monster/> } />
-//         </Routes>
-//       </BrowserRouter>
-//     </div>
-//   )
-// }
+}
 
 // export function Component() {
 //   return (
@@ -131,6 +110,6 @@ function App() {
 //       </Sidebar.Items>
 //     </Sidebar>
   // );
-}
+
 
 export default App
