@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-
+import { DarkThemeToggle, Flowbite } from "flowbite-react";
 export default function Monster(){
     // indivMon, disMon, setDisMon
 
@@ -26,6 +26,8 @@ export default function Monster(){
 
     const monsterRender = disMon.map((indivMon)=> {
         return(
+            <Flowbite>
+            {/* <DarkThemeToggle /> */}
             <div key={indivMon.id}>
                 <div className='name'>{indivMon.name}</div>
                 <div className='age'>{indivMon.age}</div>
@@ -35,14 +37,15 @@ export default function Monster(){
                     {indivMon.movies}
                 </span>
             </div>
+          </Flowbite>
         )
     })
 
     return(
         <div>
-            <img src='https://m.media-amazon.com/images/I/81uTGf+SNGL._AC_UF894,1000_QL80_.jpg'/>
-            <img src='https://m.media-amazon.com/images/I/61NKUBVAoKL._AC_UF894,1000_QL80_.jpg'/>
+            {/* <img src='https://m.media-amazon.com/images/I/81uTGf+SNGL._AC_UF894,1000_QL80_.jpg'/> */}
             {monsterRender}
+            {/* <img src='https://m.media-amazon.com/images/I/61NKUBVAoKL._AC_UF894,1000_QL80_.jpg'/> */}
 
         </div>
     )

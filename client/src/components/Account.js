@@ -8,6 +8,8 @@ function Account({there, setThere}) {
     const [username, setUsername] = useState("");
     const [rusername, setRUsername] = useState("");
     const [rpassword, setRPassword] = useState("");
+    const [rfavmon, setRFavMon] = useState("");
+    const [rfavmov, setRFavMov] = useState("");
     const [sLI, setSLI] = useState(false);
 
 
@@ -40,27 +42,32 @@ function Account({there, setThere}) {
 
     function Create(e){
         e.preventDefault();
-        fetch('/api/user', {
+        fetch('/user', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                username: e.target[1].value,
-                password: e.target[2].value,
-                fav_mon: e.target[3].value,
-                fav_mov: e.target[4].value 
-            })
-            .then(r => r.json())
-            .then(data => {
-                if (data.errors == null) {
-                    alert("Created Account Successful")
-                    navigate('/')
-                } else {
-                    alert(data.errors)
-                }
+                username: rusername,
+                password: rpassword,
+                fav_mon: rfavmon,
+                fav_mov: rfavmov
             })
         })
+        .then(r => {
+            if (r.ok) {
+                setRUsername("")
+                setRPassword("")
+                setRFavMon("")
+                setRFavMov("")
+                // navigate('/monster')
+            }
+            else{
+                alert("Username or Password Invalid")
+                return undefined
+            }
+        })
+        .then(data=>setThere(data))
     }
 
     // function handleLogout(){
@@ -79,7 +86,7 @@ function Account({there, setThere}) {
         <TextInput value={username} onChange={(e) => setUsername(e.target.value)} type='text' id="username"/>
           <Label value="Your skullette key" />
         <TextInput value={password} onChange={(e) => setPassword(e.target.value)} type='text' id="password"/>
-        <input type="checkbox" onChange={(e)=>setSLI(!sLI)}/>
+        <input type="checkbox" name='stayLoggedIn' value={sLI} onChange={e=>setSLI(!sLI)}/>
       <Button variant='primary' type="submit">Login</Button>
       <Button variant='primary' className='mt-3' type="submit">Create New User</Button>
     </form>
@@ -90,7 +97,7 @@ function Account({there, setThere}) {
           <Label value="Your skullette key" /> 
         <TextInput id="password"value={rpassword} onChange={(e) => setRPassword(e.target.value)}/>
           <Label value="Favorite Monster High Character" />
-        <TextInput id="fav_mon" />
+        <TextInput id="fav_mon" value={rfavmon} onChange={(e)=>setRFavMon(e.target.value)}/>
         {/* <Checkbox id="agree" />
         <Label htmlFor="agree" className="flex"/>
           I would like to see the stuff about my favorite&nbsp;
@@ -98,7 +105,7 @@ function Account({there, setThere}) {
             terms and conditions
           </Link> */}
           <Label value="Favorite Monster High Movie" />
-        <TextInput id="fav_mov" />
+        <TextInput id="fav_mov" name='stayLoggedIn' value={sLI} onChange={(e)=>setRFavMov(e.target.value)}/>
         {/* <Checkbox id="agree" />
         <Label htmlFor="agree" className="flex"/>
         I would like to see the stuff about my favorite movie&nbsp;
