@@ -5,7 +5,12 @@
   --link: #61dafb;
   --text: hsla(0, 0%, 100%, 0.88);
 }
-
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 
 @tailwind base;
 @tailwind components;

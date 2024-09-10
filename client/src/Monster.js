@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react'
-import { DarkThemeToggle, Flowbite } from "flowbite-react";
+import { Button} from "flowbite-react";
+import { useNavigate } from 'react-router-dom' 
+import Details from './components/Details';
 export default function Monster(){
-    // indivMon, disMon, setDisMon
-
     const [disMon, setDisMon] = useState([])
-
+    const navigate = useNavigate();
     // https://shop.mattel.com/search?q=monster+high#filter.ss_filter_tags_super_category=Dolls%20&%20Dollhouses/filter.ss_brand=Monster%20High/filter.ss_filter_tags_web_category=Dolls
     // https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=monster+high+dolls+g1&_sacat=0&_odkw=monster+high+dolls&_osacat=0
     useEffect(()=>{
@@ -21,32 +21,29 @@ export default function Monster(){
             setDisMon(data)
         }) 
     },[])
-
-    console.log(disMon)
+    const handleDetails = (indivMon) => {
+        navigate('/details', { state: { disMon, indivMon } });
+    };
 
     const monsterRender = disMon.map((indivMon)=> {
+        console.log(indivMon)
         return(
-            <Flowbite>
-            {/* <DarkThemeToggle /> */}
-            <div key={indivMon.id}>
-                <div className='name'>{indivMon.name}</div>
-                <div className='age'>{indivMon.age}</div>
-                <div className='parents'>{indivMon.parents}</div>
-                <span>
-                    <i className='movies'/>
-                    {indivMon.movies}
-                </span>
+            <>
+            <div class="ui card">
             </div>
-          </Flowbite>
+            <div key={indivMon.id}>
+                <Button className='name' onClick={() => handleDetails(indivMon)}>{indivMon.name}</Button>
+                {/* <div class="content">
+                    </div>
+                <div className='age'>{indivMon.age}</div>
+                <div className='parents'>{indivMon.parents}</div> */}
+            </div>
+            </>
         )
     })
-
     return(
         <div>
-            {/* <img src='https://m.media-amazon.com/images/I/81uTGf+SNGL._AC_UF894,1000_QL80_.jpg'/> */}
             {monsterRender}
-            {/* <img src='https://m.media-amazon.com/images/I/61NKUBVAoKL._AC_UF894,1000_QL80_.jpg'/> */}
-
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import { Button} from "flowbite-react";
 import { Sidebar } from "flowbite-react";
-import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from "react-icons/hi";
+import { HiChartPie, HiInbox, HiUser, HiViewBoards } from "react-icons/hi";
 
 export default function Head({setThere}) {
     console.log(setThere)
@@ -31,7 +31,7 @@ export default function Head({setThere}) {
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>
-            <img src="https://snworksceo.imgix.net/bsd/ab50bb2e-e153-466f-a916-16c4a799a82c.sized-1000x1000.webp?w=1000" alt="monster high"/>           
+            <img src="https://mhcollector.com/wp-content/uploads/2015/02/Original-Ghouls-Collection-6-Pack.jpg" alt="monster high"/>           
             <Button onClick={handleLogout}> Logout </Button>
         </div>
     )

@@ -1,3 +1,4 @@
+import { Button } from 'flowbite-react'
 import {useState, useEffect} from 'react'
 
 export default function Media(){
@@ -23,14 +24,14 @@ export default function Media(){
     const mediaRender = med.map((indivMed)=> {
         return(
             <div key={indivMed.id}>
-                <div className='movies'>{indivMed.movies}</div>
+                <Button className='movies' href='https://www.imdb.com/list/ls033255959/'>{indivMed.movies}</Button>
             </div>
         )
     })
     const mediaRen = med.map((indivMed)=> {
         return(
             <div key={indivMed.id}>
-                <div className='episodes'>{indivMed.episodes}</div>
+                <Button className='episodes' href='https://www.youtube.com/@MonsterHigh/featured'>{indivMed.episodes}</Button>
             </div>
         )
     })

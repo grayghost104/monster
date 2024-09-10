@@ -70,13 +70,6 @@ function Account({there, setThere}) {
         .then(data=>setThere(data))
     }
 
-    // function handleLogout(){
-    //     fetch('/api/logout',{method:"DELETE"})
-    //     .then(r=>r.json())
-    //     .then(data => setUser(undefined))
-    //     .then(()=>navigate('/'))
-    // }
-
     return(
         <>
         <h1>Monster High!</h1>

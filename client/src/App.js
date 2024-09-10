@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Media from "./components/Media";
-import Monster from "./components/Monster";
 import Buy from "./components/Buy";
 import Head from "./Head";
 import Account from "./components/Account";
+import Details from "./components/Details";
+import Monster from "./Monster";
 import {
   Routes,
   Route,
@@ -34,15 +35,16 @@ function App() {
       <Head setThere={setThere}/>
         <Routes>
           { there ? (
-            <> 
+            <>  
           <Route path='/buy' element={<Buy/>}/>
           <Route path='/media' element={<Media/>}/> 
           <Route path="/monster" element={<Monster/> } />
-            </>
+          <Route path='/details' element={<Details/>}/>
+             </>
           ): (
             <>
-            <Route path='/' element={<Account there={there} setThere={setThere}/>}/>
-            </>
+            <Route path='/' element={<Account there={there} setThere={setThere}/>}/> 
+             </>
           )}
         </Routes>
       </BrowserRouter>

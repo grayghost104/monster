@@ -27,82 +27,118 @@ m1 = Monster(
     name = "Jinafire Long",
     age = 1500,
     parents = "Japanese human and Chinese dragons",
-    movies = ""
+    movies = "Monster High Scaris City of Frights", "Monster High Freaky Fusion",
+    img = "https://i.ebayimg.com/images/g/4jgAAOSwcJxl-Huo/s-l1200.jpg",
+    friends = "Clawdeen Wolf", "Skelita Calaveras", "Catrine DeMew", "Robecca Steam", "Heath Burns", "Marisol Coxi",
+    enemies = ""
     )
 m2 = Monster(
     name= "Abbey Bominable",
     age = 16,
     parents = "Tundra Bominable and the Abominable Snowman",
     movies = ""
+    img = "",
+    friends = "Frankie Stein", "Lagoona Blue", "Marisol Coxi", "Headless Headmistress Bloodgood", "Draculaura", "Clawdeen Wolf", "Heath Burns" , "Ricky", "Ghoulia Yelps","Cleo de Nile", "Clawd Wolf", "Howleen Wolf", "C.A. Cupid", "Catty Noir",
+    enemies = "Toralei Stripe", "Purresphone", "Meowlody", "C.A. Cupid", "Manny Taur", "Andy Beast", "Bartleby Farnum", "Lilith Van Hellscream", "New Salem Sheriff", "Moanatella Ghostier","Kieran Valentine"
     )
 m3 = Monster(
     name = "Clawdeen Wolf",
     age = 15,
     parents = "Clawrk and Harriet Wolf.",
-    movies = "" 
+    movies = ""
+    img = "",
+    friends = "",
+    enemies = "" 
     # ["Monster High New Ghoul at School", "Monster High Fright On", "Monster High Why Do Ghouls Fall in Love?", "Monster High Escape from Skull Shores", "Monster High Ghouls Rule!", "Monster High Friday Night Frights", "Monster High Scaris City of Frights", "Monster High 13 Wishes", "Monster High Frights Camera Action!", "Monster High Freaky Fusion", "Monster High Haunted", "Monster High Boo York Boo York", "Monster High Great Scarrier Reef"]
     )
 m4 = Monster(
     name = "Robecca Steam",
     age = 116,
     parents = "Hexiciah Steam",
-    movies = "" 
+    movies = ""
+    img = "",
+    friends = "",
+    enemies = "" 
     # ["Monster High New Ghoul at School", "Monster High Fright On", "Monster High Why Do Ghouls Fall in Love?", "Monster High Escape from Skull Shores", "Monster High Ghouls Rule!", "Monster High Friday Night Frights", "Monster High Scaris City of Frights", "Monster High 13 Wishes", "Monster High Frights Camera Action!", "Monster High Freaky Fusion", "Monster High Haunted", "Monster High Boo York Boo York", "Monster High Great Scarrier Reef"]
     )
 m5 = Monster(
     name = "Cleo de Nile",
     age = 5842,
     parents = "Mummy",
-    movies = "" 
+    movies = ""
+    img = "",
+    friends = "",
+    enemies = "" 
     # ["Monster High New Ghoul at School", "Monster High Fright On", "Monster High Why Do Ghouls Fall in Love?", "Monster High Escape from Skull Shores", "Monster High Ghouls Rule!", "Monster High Friday Night Frights", "Monster High Scaris City of Frights", "Monster High 13 Wishes", "Monster High Frights Camera Action!", "Monster High Freaky Fusion", "Monster High Haunted", "Monster High Boo York Boo York", "Monster High Great Scarrier Reef"]
     )
 m6 = Monster(
     name = "Deuce Gorgon",
     age = 15,
     parents = "Medusa",
-    movies = "" 
+    movies = ""
+    img = "",
+    friends = "",
+    enemies = "" 
     # ["Monster High New Ghoul at School", "Monster High Fright On", "Monster High Why Do Ghouls Fall in Love?", "Monster High Escape from Skull Shores", "Monster High Ghouls Rule!", "Monster High Friday Night Frights", "Monster High Scaris City of Frights", "Monster High 13 Wishes", "Monster High Frights Camera Action!", "Monster High Freaky Fusion", "Monster High Haunted", "Monster High Boo York Boo York", "Monster High Great Scarrier Reef"]
     )
 m7 = Monster(
     name = "Draculaura",
     age = 1600,
     parents = "Dracula",
-    movies = "" 
+    movies = ""
+    img = "",
+    friends = "",
+    enemies = "" 
     # ["Monster High New Ghoul at School", "Monster High Fright On", "Monster High Why Do Ghouls Fall in Love?", "Monster High Escape from Skull Shores", "Monster High Ghouls Rule!", "Monster High Friday Night Frights", "Monster High Scaris City of Frights", "Monster High 13 Wishes", "Monster High Frights Camera Action!", "Monster High Freaky Fusion", "Monster High Haunted", "Monster High Boo York Boo York", "Monster High Great Scarrier Reef"]
     )
 m8 = Monster(
     name = "Frankie Stein",
     age = 15,
     parents = "Viktor and Viveka Stein",
-    movies = "" 
+    movies = ""
+    img = "",
+    friends = "",
+    enemies = "" 
     # ["Monster High New Ghoul at School", "Monster High Fright On", "Monster High Why Do Ghouls Fall in Love?", "Monster High Escape from Skull Shores", "Monster High Ghouls Rule!", "Monster High Friday Night Frights", "Monster High Scaris City of Frights", "Monster High 13 Wishes", "Monster High Frights Camera Action!", "Monster High Freaky Fusion", "Monster High Haunted", "Monster High Boo York Boo York", "Monster High Great Scarrier Reef"]
     )
 m9 = Monster(
     name = "Ghoulia Yelps",
     age =  16,
     parents = "Hairy and Hellen Yelps",
-    movies = "" 
+    movies = ""
+    img = "",
+    friends = "",
+    enemies = "" 
     # ["Monster High New Ghoul at School", "Monster High Fright On", "Monster High Why Do Ghouls Fall in Love?", "Monster High Escape from Skull Shores", "Monster High Ghouls Rule!", "Monster High Friday Night Frights", "Monster High Scaris City of Frights", "Monster High 13 Wishes", "Monster High Frights Camera Action!", "Monster High Freaky Fusion", "Monster High Haunted", "Monster High Boo York Boo York", "Monster High Great Scarrier Reef"]
     )
 m10 = Monster(
     name = "Lagoona Blue",
     age = 16,
     parents = "Wade Blue and Angel Fisher",
-    movies = "" 
+    movies = ""
+    img = "",
+    friends = "",
+    enemies = "" 
     # ["Monster High New Ghoul at School", "Monster High Fright On", "Monster High Why Do Ghouls Fall in Love?", "Monster High Escape from Skull Shores", "Monster High Ghouls Rule!", "Monster High Friday Night Frights", "Monster High Scaris City of Frights", "Monster High 13 Wishes", "Monster High Frights Camera Action!", "Monster High Freaky Fusion", "Monster High Haunted", "Monster High Boo York Boo York", "Monster High Great Scarrier Reef"]
     )
 m11 = Monster(
     name = "Heath Burns",
     age = 15,
     parents = "Greek fire elemental mother and Korean hearth fire demi-god",
-    movies = "" 
+    movies = ""
+    img = "",
+    friends = "",
+    enemies = "" 
     # ["Monster High New Ghoul at School", "Monster High Fright On", "Monster High Why Do Ghouls Fall in Love?", "Monster High Escape from Skull Shores", "Monster High Ghouls Rule!", "Monster High Friday Night Frights", "Monster High Scaris City of Frights", "Monster High 13 Wishes", "Monster High Frights Camera Action!", "Monster High Freaky Fusion", "Monster High Haunted", "Monster High Boo York Boo York", "Monster High Great Scarrier Reef"]
     )
 m12 = Monster(
     name = "Invisil Billy",
     age = 15,
     parents = "Invisible Man",
-    movies = "" 
+    movies = ""
+    img = "",
+    friends = "",
+    enemies = "" 
     # ["Monster High New Ghoul at School", "Monster High Fright On", "Monster High Why Do Ghouls Fall in Love?", "Monster High Escape from Skull Shores", "Monster High Ghouls Rule!", "Monster High Friday Night Frights", "Monster High Scaris City of Frights", "Monster High 13 Wishes", "Monster High Frights Camera Action!", "Monster High Freaky Fusion", "Monster High Haunted", "Monster High Boo York Boo York", "Monster High Great Scarrier Reef"]
     )
 def news():
@@ -112,17 +148,23 @@ def news():
         soup= BeautifulSoup(response.text, "html.parser")
         ebay = []
         d1 = soup.find('li', id="item5a1575ea09")
+        l1 = d1.find("a", class_='s-item__link').get('href')
         d2 = soup.find('li', id="item36e246057f")
+        l2 = d2.find("a", class_='s-item__link').get('href')
         d3 = soup.find('li', id="item2b5908a6f9")
+        l3 = d3.find("a", class_='s-item__link').get('href')
         d4 = soup.find('li', id="item2b62d9c3a3")
+        l4 = d4.find("a", class_='s-item__link').get('href')
         d5 = soup.find('li', id="item26def8c1df")
-        d6 = soup.find('li', id="item472fe7ed45")
-        ebay.append(d1)
-        ebay.append(d2)
-        ebay.append(d3)
-        ebay.append(d4)
-        ebay.append(d5)
-        ebay.append(d6)
+        l5 = d5.find("a", class_='s-item__link').get('href')
+
+        ebay.append(l1)
+        ebay.append(l2)
+        ebay.append(l3)
+        ebay.append(l4)
+        ebay.append(l5)
+        print(ebay)
+      
         for i in itertools.zip_longest(ebay, fillvalue=""):
             print(type(i))
             buy = Buy(
