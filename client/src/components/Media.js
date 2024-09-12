@@ -19,28 +19,60 @@ export default function Media(){
         }) 
     },[])
 
+    // function handleAdd(e){
+    //     e.preventDefault();
+    //     fetch('/medis', {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             movies: movies, 
+    //             episodes: episodes
+    //         })
+    //         .then(r=>r.json())
+    //         .then(data=>{
+    //             const newArr = [...med, data]
+    //             setMed(newArr)
+    //         })  
+    //     })
+    // }
+
 
     // console.log(med)
     const mediaRender = med.map((indivMed)=> {
         return(
             <div key={indivMed.id}>
-                <Button className='movies' href='https://www.imdb.com/list/ls033255959/'>{indivMed.movies}</Button>
+                <>{indivMed.movies}</>
             </div>
         )
     })
     const mediaRen = med.map((indivMed)=> {
         return(
             <div key={indivMed.id}>
-                <Button className='episodes' href='https://www.youtube.com/@MonsterHigh/featured'>{indivMed.episodes}</Button>
+                <>{indivMed.episodes}</>
             </div>
         )
     })
     return(
         <>
-        <h1>Movies</h1>
+        <h1>G1 Movies and Episodes</h1>
+        <h2><Button className='movies' href='https://www.imdb.com/list/ls033255959/'>Movies</Button></h2>
         {mediaRender}
-        <h1>Episodes</h1>
+        <h2><Button className='episodes' href='https://www.youtube.com/@MonsterHigh/featured'>Episodes</Button></h2>
         {mediaRen}
+
+        <>
+        {/* <form onSubmit={handleAdd}>
+            <Label value="Your username" />
+        <TextInput value={fdjslf} onChange={(e) => setUsername(e.target.value)} type='text' id="username"/>
+          <Label value="Your skullette key" />
+        <TextInput value={password} onChange={(e) => setPassword(e.target.value)} type='text' id="password"/>
+        <input type="checkbox" name='stayLoggedIn' value={sLI} onChange={e=>setSLI(!sLI)}/>
+      <Button variant='primary' type="submit">Login</Button>
+      <Button variant='primary' className='mt-3' type="submit">Create New User</Button>
+    </form> */}
+        </>
         </>
     )
 }

@@ -23,7 +23,8 @@ class Monster(db.Model, SerializerMixin):
 
 class Story(db.Model, SerializerMixin):
     __tablename__= 'stories' 
-    id=db.Column (db.Integer, primary_key=True) 
+    id=db.Column (db.Integer, primary_key=True)
+    mon_name = db.Column(db.String) 
     origin_story= db.Column(db.String) 
     L_book = db.Column (db.String)
     monster_id = db.Column(db.Integer,db.ForeignKey("monsters.id"))

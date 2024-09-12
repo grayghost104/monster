@@ -24,15 +24,16 @@ export default function Monster(){
     const handleDetails = (indivMon) => {
         navigate('/details', { state: { disMon, indivMon } });
     };
-
+  
     const monsterRender = disMon.map((indivMon)=> {
-        console.log(indivMon)
+        console.log(disMon)
         return(
             <>
             <div class="ui card">
             </div>
             <div key={indivMon.id}>
                 <Button className='name' onClick={() => handleDetails(indivMon)}>{indivMon.name}</Button>
+                
                 {/* <div class="content">
                     </div>
                 <div className='age'>{indivMon.age}</div>

@@ -1,7 +1,7 @@
 from flask import request, session, jsonify, make_response
 from flask_restful import Resource, Api
 from config import app, db, api
-from models import User, Monster, Buy, Media
+from models import User, Monster, Buy, Media, Story
 
 # endpoint='register' add this after api.add_resource(All_User,'/user' ,endpoint='register')
 
@@ -324,6 +324,67 @@ class One_Buy(Resource):
 
 api.add_resource(All_Buy,'/buy')
 api.add_resource(One_Buy,'/buy/<int:id>')
+
+
+
+class All_Story(Resource):
+
+    def get(self):
+        au = Story.query.all()
+        return [us.to_dict() for us in au],200
+
+    def post(self):
+        try:
+            data = request.get_json()
+            new_story = Story(
+                mon_name = data['mon_name'], 
+                origin_story = data['origin_story'],
+                L_book = data['L_book']
+            )
+            db.session.add(new_story)
+            db.session.commit()
+            return new_story.to_dict(),200
+        except Exception as e:
+            return make_response({'errors': str(e)},404)
+
+class One_Story(Resource):
+
+    def get(self, id):
+        act = Story.query.filter(Story.id == id).first()
+        if (act):
+            return act.to_dict(),200
+        else:
+            return make_response({'error':'This story does not exist'},400)
+
+    def patch(self, id):
+        one = Story.query.filter(Story.id == id).first()
+        if (one):
+            try:
+                data = request.get_json()
+                for key in data:
+                    setattr(one,key,data[key])
+                db.session.add(one)
+                db.session.commit()
+                return one.to_dict(),202
+            except Exception as e:
+                return make_response({"error": str(e)},404) 
+        else:
+            return make_response('This story does not exist',404)
+
+    def delete(self, id):
+        one = Story.query.filter(Story.id == id).first()
+        if (one):
+            db.session.delete(one)
+            db.session.commit()
+            return {}, 204
+        else:
+            return make_response({
+                'error': 'Could not find story'
+            },404)
+
+api.add_resource(All_Story,'/story')
+api.add_resource(One_Story,'/story/<int:id>')
+
 
 #Idk if i i will keep this or being able to save a monster. 
 #I think I will just do that one way when they login in/ create an account they go start to that monster 

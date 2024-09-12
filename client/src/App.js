@@ -5,6 +5,7 @@ import Head from "./Head";
 import Account from "./components/Account";
 import Details from "./components/Details";
 import Monster from "./Monster";
+import E_user from "./components/Home";
 import {
   Routes,
   Route,
@@ -32,7 +33,7 @@ function App() {
   return(
     <div className="App">
       <BrowserRouter>
-      <Head setThere={setThere}/>
+      <Head setThere={setThere} there={there}/>
         <Routes>
           { there ? (
             <>  
@@ -40,6 +41,7 @@ function App() {
           <Route path='/media' element={<Media/>}/> 
           <Route path="/monster" element={<Monster/> } />
           <Route path='/details' element={<Details/>}/>
+          <Route path='/home' element={<E_user there={there} setThere={setThere}/>}/>
              </>
           ): (
             <>

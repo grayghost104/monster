@@ -1,16 +1,11 @@
 import { Button} from "flowbite-react";
 import { Sidebar } from "flowbite-react";
+import { BiBuoy } from "react-icons/bi";
 import { HiChartPie, HiInbox, HiUser, HiViewBoards } from "react-icons/hi";
 
 export default function Head({setThere}) {
     console.log(setThere)
-    
-  function handleLogout(){
-    fetch('/logout',{method:"DELETE"})
-    // .then(r=>r.json())
-    .then(data => setThere(undefined))
-    // .then(()=>navigate('/'))
-}
+  
     return(
         <div>
         <Sidebar aria-label="Default sidebar example">
@@ -26,13 +21,15 @@ export default function Head({setThere}) {
             Movies and episodes
           </Sidebar.Item>
           <Sidebar.Item href="/" icon={HiUser}>
+            Login/Register
+          </Sidebar.Item>
+          <Sidebar.Item href="/home" icon={BiBuoy}>
             Home
           </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>
             <img src="https://mhcollector.com/wp-content/uploads/2015/02/Original-Ghouls-Collection-6-Pack.jpg" alt="monster high"/>           
-            <Button onClick={handleLogout}> Logout </Button>
         </div>
     )
 
