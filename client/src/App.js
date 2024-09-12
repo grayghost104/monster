@@ -6,6 +6,8 @@ import Account from "./components/Account";
 import Details from "./components/Details";
 import Monster from "./Monster";
 import E_user from "./components/Home";
+import Story from "./components/Story";
+import Change from "./components/Change";
 import {
   Routes,
   Route,
@@ -41,6 +43,8 @@ function App() {
           <Route path='/media' element={<Media/>}/> 
           <Route path="/monster" element={<Monster/> } />
           <Route path='/details' element={<Details/>}/>
+          <Route path='/story' element={<Story/>}/>
+          <Route path='/change' element={<Change/>}/>
           <Route path='/home' element={<E_user there={there} setThere={setThere}/>}/>
              </>
           ): (

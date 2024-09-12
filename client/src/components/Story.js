@@ -21,13 +21,30 @@ export default function Story(){
     },[])
 
 
-    const mediaRender = med.map((indivMed)=> {
+
+    
+    const storyRender = disSto.map((indivSto)=> {
         return(
-            <div key={indivMed.id}>
-                <>{indivMed.movies}</>
+            <div key={indivSto.id}>
+                <h1>{indivSto.mon_name}</h1>
+                <h3>Origin Story</h3>
+                <p1>{indivSto.origin_story}</p1>
+                <h3>G1</h3>
+                <p2>{indivSto.L_book}</p2>
             </div>
         )
     })
+
+
+
+    return(
+        <div>
+            <Button onClick={() => navigate('/change')}>Want to add some of your brains into a story?</Button>
+            <Button onClick={() => navigate('/change')}>Want erases this story off this earth???</Button>
+            <Button onClick={() => navigate('/change')}>Want to add some of your own horros?</Button>
+            {storyRender}
+        </div>
+    )
 
 
 

@@ -39,6 +39,31 @@ export default function Media(){
     // }
 
 
+    // function handleEdit() {
+    //     fetch(`api/`, {
+    //       method: "PATCH",
+    //       headers: {
+    //         "Content-Type": "Application/json"
+    //       },
+    //       body: JSON.stringify({
+    //         pants: Pants,
+    //         shirts: Shirts,
+    //         other_clothes: Other_Clothes
+    //       })
+    //     })
+    //       .then(r => r.json())
+    //       .then(updatedLug => {
+    //         const newArr = projects.map(project => {
+    //           if (project.id === updatedProject.id) {
+    //             return updatedProject
+    //           }
+    //           return project
+    //         })
+    //         setProjects(newArr)
+    //       })
+    //   }
+
+
     // console.log(med)
     const mediaRender = med.map((indivMed)=> {
         return(

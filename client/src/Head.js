@@ -1,7 +1,6 @@
-import { Button} from "flowbite-react";
 import { Sidebar } from "flowbite-react";
 import { BiBuoy } from "react-icons/bi";
-import { HiChartPie, HiInbox, HiUser, HiViewBoards } from "react-icons/hi";
+import { HiChartPie, HiInbox, HiUser, HiViewBoards, HiArrowSmRight } from "react-icons/hi";
 
 export default function Head({setThere}) {
     console.log(setThere)
@@ -16,6 +15,9 @@ export default function Head({setThere}) {
           </Sidebar.Item>
           <Sidebar.Item href="/monster" icon={HiViewBoards} labelColor="dark">
             Monsters
+          </Sidebar.Item>
+          <Sidebar.Item href="/story" icon={HiArrowSmRight}>
+            Story
           </Sidebar.Item>
           <Sidebar.Item href="/media" icon={HiInbox}>
             Movies and episodes

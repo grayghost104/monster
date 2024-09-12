@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import { Button} from "flowbite-react";
 import { useNavigate } from 'react-router-dom' 
-import Details from './components/Details';
+// import Details from './components/Details';
 export default function Monster(){
     const [disMon, setDisMon] = useState([])
     const navigate = useNavigate();
@@ -32,12 +32,12 @@ export default function Monster(){
             <div class="ui card">
             </div>
             <div key={indivMon.id}>
-                <Button className='name' onClick={() => handleDetails(indivMon)}>{indivMon.name}</Button>
-                
-                {/* <div class="content">
+                {/* <Button className='name' onClick={() => handleDetails(indivMon)}>{indivMon.name}</Button> */}
+
+                <div class="content">
                     </div>
                 <div className='age'>{indivMon.age}</div>
-                <div className='parents'>{indivMon.parents}</div> */}
+                <div className='parents'>{indivMon.parents}</div>
             </div>
             </>
         )

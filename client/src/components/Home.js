@@ -10,6 +10,17 @@ function E_user({there, setThere}){
         fetch('/logout',{method:"DELETE"})
         .then(data => setThere(undefined))
       }
+    
+    // function handleGone(id){
+    //     fetch('/user/${userId}', {
+    //         method: 'DELETE',
+    //         })
+    //         .then(r=>r.json())
+    //         .then(data=>{
+
+    //         })
+    //     })
+    // }
 
 
 
