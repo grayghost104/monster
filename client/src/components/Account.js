@@ -33,7 +33,7 @@ function Account({there, setThere}) {
         .then(data=>{
           console.log(data)
           setThere(data)
-          navigate('/monster')
+          navigate('/home')
         })
         .catch(data=>{
           alert('Invalid Username or Password')
@@ -91,20 +91,10 @@ function Account({there, setThere}) {
         <TextInput id="password"value={rpassword} onChange={(e) => setRPassword(e.target.value)}/>
           <Label value="Favorite Monster High Character" />
         <TextInput id="fav_mon" value={rfavmon} onChange={(e)=>setRFavMon(e.target.value)}/>
-        {/* <Checkbox id="agree" />
-        <Label htmlFor="agree" className="flex"/>
-          I would like to see the stuff about my favorite&nbsp;
-          <Link href="#" className="text-cyan-600 hover:underline dark:text-cyan-500">
-            terms and conditions
-          </Link> */}
+  
           <Label value="Favorite Monster High Movie" />
-        <TextInput id="fav_mov" name='stayLoggedIn' value={sLI} onChange={(e)=>setRFavMov(e.target.value)}/>
-        {/* <Checkbox id="agree" />
-        <Label htmlFor="agree" className="flex"/>
-        I would like to see the stuff about my favorite movie&nbsp;
-          <Link href="#" className="text-cyan-600 hover:underline dark:text-cyan-500">
-            terms and conditions
-          </Link> */}
+        <TextInput id="fav_mov" name='fav_mov' value={rfavmov} onChange={(e)=>setRFavMov(e.target.value)}/>
+
            <input type="checkbox" onChange={(e)=>setSLI(!sLI)}/>
       <Button type="submit">Register new account</Button>
     </form>

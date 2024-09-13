@@ -3,11 +3,11 @@ import Media from "./components/Media";
 import Buy from "./components/Buy";
 import Head from "./Head";
 import Account from "./components/Account";
-import Details from "./components/Details";
 import Monster from "./Monster";
 import E_user from "./components/Home";
 import Story from "./components/Story";
 import Change from "./components/Change";
+import More from "./components/More";
 import {
   Routes,
   Route,
@@ -42,9 +42,9 @@ function App() {
           <Route path='/buy' element={<Buy/>}/>
           <Route path='/media' element={<Media/>}/> 
           <Route path="/monster" element={<Monster/> } />
-          <Route path='/details' element={<Details/>}/>
           <Route path='/story' element={<Story/>}/>
           <Route path='/change' element={<Change/>}/>
+          <Route path='/more' element={<More/>}/>
           <Route path='/home' element={<E_user there={there} setThere={setThere}/>}/>
              </>
           ): (

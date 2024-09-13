@@ -5,12 +5,22 @@
   --link: #61dafb;
   --text: hsla(0, 0%, 100%, 0.88);
 }
+iframe {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 img {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
 }
+div {
+  color: #ff3399;
+}
+
 
 @tailwind base;
 @tailwind components;

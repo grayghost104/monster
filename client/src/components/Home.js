@@ -10,22 +10,13 @@ function E_user({there, setThere}){
         fetch('/logout',{method:"DELETE"})
         .then(data => setThere(undefined))
       }
-    
-    // function handleGone(id){
-    //     fetch('/user/${userId}', {
-    //         method: 'DELETE',
-    //         })
-    //         .then(r=>r.json())
-    //         .then(data=>{
-
-    //         })
-    //     })
-    // }
-
 
 
     return(
 <>
+<h1>Welcome {there.username}!!</h1>
+<h2>Favorite Media: {there.fav_mov}</h2>
+<h2>Favorite Monster: {there.fav_mon}</h2>
 <Button onClick={handleLogout}> Logout </Button>
 </>
     );
