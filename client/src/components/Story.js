@@ -6,7 +6,7 @@ export default function Story(){
     const navigate = useNavigate();
 
     useEffect(()=>{
-        fetch('/story')
+        fetch('http://127.0.0.1:5555/story')
         .then(r=>{
             if(r.ok){
                 return r.json()

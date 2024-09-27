@@ -6,7 +6,7 @@ export default function Media(){
     const [med, setMed] = useState([])
     const navigate = useNavigate();
     useEffect(()=>{
-        fetch('/media')
+        fetch('http://127.0.0.1:5555/media')
         .then(r=>{
             if(r.ok){
                 return r.json()

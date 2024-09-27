@@ -1,4 +1,4 @@
-from flask import request, session, jsonify, make_response
+from flask import request, session, jsonify, make_response, render_template
 from flask_restful import Resource, Api
 from config import app, db, api
 from models import User, Monster, Buy, Media, Story
@@ -431,6 +431,13 @@ api.add_resource(One_Story,'/story/<int:id>')
 #             },404)
 # api.add_resource(One_SMon, '/o_s_mon/<int:id>')
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("index.html")
+
+# @app.route("/")
+# def index():
+#     return render_template("index.html")
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

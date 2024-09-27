@@ -18,7 +18,7 @@ import {
 function App() {
   const [there, setThere] = useState(null);
   useEffect(()=>{
-    fetch('/checksessions')
+    fetch('http://127.0.0.1:5555/checksessions')
     .then(r=>{
       if (r.ok){
         return r.json()
@@ -59,3 +59,5 @@ function App() {
 }
 
 export default App
+
+ // "proxy": "http://localhost:5555"

@@ -11,8 +11,12 @@ import os
 # Local imports
 # load_dotenv()
 # Instantiate app, set attributes
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app = Flask(__name__,
+    static_url_path='',
+    static_folder='../client/build',
+    template_folder='../client/build'
+)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://your_monster_high_user:p4Gg8Zd5PDPGyE1vALYljJo5G5cRjLOJ@dpg-crpidrdsvqrc738rmpdg-a.oregon-postgres.render.com/your_monster_high'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
 
